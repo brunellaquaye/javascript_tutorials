@@ -66,11 +66,11 @@
               if (guessCount === 1) {
                 guesses.textContent = "Previous guess:";
               }
-              guesses.textContent = `${guessess.textContent} ${userGuess}`;
+              guesses.textContent = `${guesses.textContent} ${userGuess}`;
 
 //we use the conditional statement throughout the code to make the game function
 
-
+      
               if (userGuess === randomNumber) {
                 lastResult.textContent = "Congratulations! You got it right!";
                 lastResult.style.backgroundColor = "green";
@@ -102,6 +102,27 @@
             document.body.append(resetButton);
           resetButton.addEventListener("click",resetGame);
         }
+        function resetGame() {
+          guessCount = 1;
+
+          const resetParas = 
+        document.querySelectorALl(".resultParas p");
+         for (const resetPara of resetParas) {
+          resetPara.textContent = "";
+         }
+
+         resetButton.parentNode.removeChild(resetButton);
+
+         guessField.disabled = false;
+         guessSubmit.disabled = false;
+         guessField.value = "";
+         guessField.focus();
+
+         lastResult.style.backroundColor = "white";
+
+         randomNumber = Math.floor(Math.random() * 100) + 1;
+        }
+
           </script>
     </body>
 </html>
