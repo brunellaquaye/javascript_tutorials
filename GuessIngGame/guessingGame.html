@@ -1,0 +1,107 @@
+<!--This guessing game is to provide a first splash into JavaScript so do not be suprised if you see a lot of comments explaining some basic concepts in Js-->
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Number Guessing Game</title>
+
+        <style>
+            html {
+                font-family:sans-serif;
+            }
+
+            body {
+                margin: 0;
+                width: 50%;
+                min-width: 800px;
+                max-width: 480px;
+            }
+            .form input[type="number"] {
+                width: 200px;
+            }
+
+            .lastResult {
+                color: white;
+                padding: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Number guessing game</h1>
+        <p>A random number has been selected between 1 and 100. See if you can guess the number in 10 turns or fewer. We will let you know if your guess was too high or low.</p>
+        <div class="form">
+            <label for="guessField">Guess a number between 1 and 100:</label>
+            <input type="number" min="1" max="100" required id="guessField" class="guessField">
+            <input type="submit" value="Submit guess" class="guessSubmit">
+          </div>
+      
+          <div class="resultParas">
+            <p class="guesses"></p>
+            <p class="lastResult"></p>
+            <p class="lowOrHi"></p>
+          </div>
+      
+          <script>
+//this is the code to set the value of the random number
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
+//here,varaiables are created to store the results or values for the data
+            const guesses = document.querySelector(".guesses");
+            const lastResult = document.querySelector(".lastResult");
+            const lowOrHi = document.querySelector(".lowOrHi");
+
+            const guessSubmit = document.querySelector(".guessSubmit");
+            const guessField = document.querySelector(".guessField");
+
+//variable assignments
+            let guessCount = 1;
+            let resetButton;
+//this is an example of the checkGuess function that is reusable since it automates the process of doing one thing over and over again.
+            function checkGuess() {
+//this is the body of the function, It encompass variable declaration and conditional statements
+
+//userGuss is declared as a const and the "Number" constructor is used to check if the number in the guessField variable is a number
+
+              const userGuess = Number(guessField.value);
+//a conditional statement checks for the condition in the bracket, and returns the activity in the block of code that follows.
+              if (guessCount === 1) {
+                guesses.textContent = "Previous guess:";
+              }
+              guesses.textContent = `${guessess.textContent} ${userGuess}`;
+
+//we use the conditional statement throughout the code to make the game function
+
+
+              if (userGuess === randomNumber) {
+                lastResult.textContent = "Congratulations! You got it right!";
+                lastResult.style.backgroundColor = "green";
+                lowOrHi.textContent = "";
+                setGameOver();
+              } else {
+                lastResult.textContent = "Wrong!";
+                lastResult.style.backgroundColor = "red";
+                if (userGuess < randomNumber) {
+                    lowOrHi.textContent = "Last guess was too low!";
+                } else {
+                    lowOrHi.textContent = "Last guess was too high!";
+                }
+  
+              }
+              guessCount++;
+              guessField.value = "";
+//the next line will focus allow next guesses to be entered once the top line has emptied it out.
+              guessField.focus();
+            }
+            //this attaches an event listener to the submit button so that if you click the submit button,something happens,which is the checkGuess function. The arguments for the addEventListener are the type of event("click") and the code to run(checkGuess function)
+            guessSubmit.addEventListener("click",checkGuess);
+
+            function setGameOver() {
+              //since we are setting the game to game over, we do not want to accept any input from,so we dissable it.
+              guessField.disabled = true;
+              guessSubmit.disabled = true;
+              reseetButton.textContent = "Start new game";
+            document.body.append(resetButton);
+          resetButton.addEventListener("click",resetGame);
+        }
+          </script>
+    </body>
+</html>
