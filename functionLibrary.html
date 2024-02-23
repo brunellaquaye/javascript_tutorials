@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Function library example</title>
+  <style>
+    input {
+      font-size: 2em;
+      margin: 10px 1px 0;
+    }
+  </style>
+  </head>
+<body>
+
+  <input class="numberInput" type="text">
+  <p></p>
+
+  <script>
+    const input = document.querySelector('.numberInput');
+    const para = document.querySelector('p');
+    function squared(num){
+        return num*num;
+    }
+    function cubed(num){
+        return num*num*num;
+    }
+    function factorial(num){
+        if (num<0) return undefined;
+        if (num === 0) return 1;
+        let x = num-1;
+        while (x > 1){
+            num *= x;
+            x--;
+        }
+        return num;
+    } 
+    //my function that I added
+    function isPerfect(num){
+        if (num>=0){
+            let squareRoot = Math.sqrt(num);
+            let result =(squareRoot*squareRoot) === num;
+            return result;
+        }else{
+            let result1 = "The number is not a perfect number"
+            return result1;
+        }
+
+    }
+
+    //add more functions
+
+    
+    //"change" in the event handler because we want to run whenever the text input value is changed(indicated when we hit enter or tab)
+    input.addEventListener("change", () => {
+        const num = parseFloat(input.value);
+        if (isNaN(num)) {
+            para.textContent = "You need to enter a number!";
+        } else {
+            para.textContent = `${num} squared is ${squared(num)}. `;
+            para.textContent += `${num} cubed is ${cubed(num)}.`;
+            para.textContent += `${num} factorial is ${factorial(num)}. `;
+            para.textContent += ` The number is a perfect number :${isPerfect(num)}`;
+        }
+    });
+
+  </script>
+</body>
+</html>
