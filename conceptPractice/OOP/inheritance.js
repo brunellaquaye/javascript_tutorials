@@ -44,6 +44,13 @@ const walter = new Professor("Walter","Statistics");
 //create a student class with the year being private
 class Student extends Person{
     #year;
+    exampleOfPrivateMethod(){
+        //you can set a method too, to be a private method.
+        this.#exampleOfPrivateMethod();
+    }
+     #exampleOfPrivateMethod(){
+        console.log("This is a private method")
+     }
 
     constructor(name,year){
         super(name);
