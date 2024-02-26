@@ -16,7 +16,7 @@ class Professor extends Person{
 //create a constructor and include the fi
     constructor(name,teaches){
         //we use super so that it can take the name property from the superclass
-        super(name) = name;
+        super(name);
         this.teaches = teaches;
     }
     introduceSelf(){
