@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+      <script>
+        async function populate() {
+  const requestURL =
+    "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
+    //this will  make a request to the request url
+  const request = new Request(requestURL);
+
+  const response = await fetch(request);
+  //this will recieve it in the form of a json
+  const superHeroes = await response.json();
+  //  const superHeroesText = await response.text();
+
+  //  const superHeroes = JSON.parse(superHeroesText);
+  populateHeader(superHeroes);
+  populateHeroes(superHeroes);
+}
+
+function populateHeader (obj) {
+    const header = document.querySelector("header");
+    //we create element and set its content to be the squade name
+    const myH1 = document.createElement("h1");
+    myH1.textContent = obj.squadName;
+    header.appendChild(myH1);
+    //we will also create a paragraph element and set it's content to be a text 
+    const myPara = document.createElement("p");
+    myPara.textContent = `Hometown:{obf.homeTown} // Formed: ${obj.formed}`;
+    header.appendChild(myPara);
+}
+
+function populateHeroes(obj){
+    const section = 
+    document.querySelector("section");
+    const heroes = obj.members;
+
+    for (const hero of heroes){
+        //this creates new html elements like h2, and paragraphs
+        const myArticle = document.createElement("article");
+        const myH2 = document.createElement("h2");
+        const myPara1 = document.createElement("p");
+        const myPara2 = document.createElement("p");
+        const myPara3 = document.createElement("p");
+        const myList = document.createElement("ul");
+        
+        //this will sent their text contents to text and paragraphs made of string literals
+        myH2.textContent = hero.name;
+    myPara1.textContent = `Secret identity: ${hero.secretIdentity}`;
+    myPara2.textContent = `Age: ${hero.age}`;
+    myPara3.textContent = "Superpowers:";
+
+    //creates a new variable made up of strings from an array and puts them into a list using a for loop to loop through the arrays.
+    const superPowers = hero.powers;
+    for (const power of superPowers) {
+      const listItem = document.createElement("li");
+      listItem.textContent = power;
+      myList.appendChild(listItem);
+    }
+
+    myArticle.appendChild(myH2);
+    myArticle.appendChild(myPara1);
+    myArticle.appendChild(myPara2);
+    myArticle.appendChild(myPara3);
+    myArticle.appendChild(myList);
+
+    section.appendChild(myArticle);
+  }
+}
+    
+populate();
+
+      </script>
+  </body>
+</html>
