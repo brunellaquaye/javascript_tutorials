@@ -166,26 +166,30 @@ while (balls.length < 25) {
 function loop() {
     ctx.fillStyle = "rgb(0 0 0 / 25%)";
     ctx.fillRect(0, 0, width, height);
+
+
+let newEvilCircle = new EvilCircle(random(0 + EvilCircle.size,width - EvilCircle.size), random(0 + EvilCircle.size,height - EvilCircle.size), 20, 20, 'true')
   
     for (const ball of balls) {
+      if (ball.exists === true) {
       ball.draw();
       ball.update();
       ball.collisionDetect();
-    }
+    }}
+    newEvilCircle.draw()
+    newEvilCircle.checkBounds();
+    newEvilCircle.collisionDetect();
+    
   
     requestAnimationFrame(loop);
   }
-  
+
+ 
 loop();  
 
+const paragraph = document.querySelector("p");
 
 
- /*class Ball extends Shape{
-    constructor(x, y, velX, velY, color, size) {
-        super(x, y, velX, velY, color, size);
-        this.color = color;
-        this.size = size;
-        this.exists = true;
-    }
- }*/
+
+
     
