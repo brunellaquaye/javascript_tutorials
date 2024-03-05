@@ -20,3 +20,37 @@ ctx.fillRect(75, 75, 100, 100);
 ctx.fillStyle = "rgb(255 0 255 / 75%)";
 ctx.fillRect(25, 100, 175, 50);
 
+//this will draw a stroke rectangle 
+ctx.strokeStyle = "rgb(255 255 255)";
+ctx.strokeRect(25, 25, 175, 200);
+
+//this is a function that will convert degrees to radians 
+function degToRad(degrees) {
+    return (degrees * Math.PI) / 180;
+  }
+
+  //drawing something more compicated using the path methods
+  //triangle
+  ctx.fillStyle = "white";
+ctx.beginPath();
+ctx.moveTo(50, 50);
+ctx.lineTo(150, 50);
+const triHeight = 50 * Math.tan(degToRad(60));
+ctx.lineTo(100, 50 + triHeight);
+ctx.lineTo(50, 50);
+ctx.fill();
+
+//circle using the arc
+ctx.fillStyle = "rgb(0 0 255)";
+ctx.beginPath();
+ctx.arc(150, 106, 50, degToRad(0), degToRad(360), false);
+ctx.fill();
+
+ctx.fillStyle = "yellow";
+ctx.beginPath();
+ctx.arc(200, 106, 50, degToRad(-45), degToRad(45), true);
+ctx.lineTo(200, 106);
+ctx.fill();
+
+
+  
